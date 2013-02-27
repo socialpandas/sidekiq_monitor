@@ -1,0 +1,5 @@
+<% url_helpers = Sidekiq::Monitor::Engine.routes.url_helpers %>
+window.SidekiqMonitor =
+  settings:
+    api_url: (path) ->
+      "<%= url_helpers.sidekiq_monitor_path %>api/#{path}"

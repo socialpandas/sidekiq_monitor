@@ -1,0 +1,6 @@
+.queue-stats
+form.form-inline
+    label.label.label-info.label-large Queue
+    =select_tag :queue_select, options_for_select(@queues), class: 'span2'
+
+== render partial: 'jobs'

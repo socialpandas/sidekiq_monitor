@@ -1,0 +1,28 @@
+doctype html
+html lang="en"
+  meta charset="utf-8"
+  meta name="viewport" content="width=device-width, initial-scale=1.0"
+  title= content_for?(:title) ? yield(:title) : app_name
+  = stylesheet_link_tag "sidekiq/monitor/application"
+  = csrf_meta_tags
+
+  body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.btn.btn-navbar data-toggle="collapse" data-target=".nav-collapse"
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+
+          = link_to "Sidekiq Monitor", root_path, class: "brand"
+
+          .nav-collapse
+            ul.nav
+              li class=(params[:controller] == 'sidekiq/monitor/jobs' ? 'active' : '') = link_to "Jobs", root_path
+              li class=(params[:controller] == 'sidekiq/monitor/queues' ? 'active' : '') = link_to "Queues", "#{root_path}queues"
+
+    .container
+      = yield
+
+    = javascript_include_tag "sidekiq/monitor/application"
