@@ -26,6 +26,10 @@ It lets you:
   * Easily isolate long-running jobs and failed jobs
   * Retry failed jobs via a button-click
 
+And it looks like this:
+
+[<img src="https://raw.github.com/socialpandas/sidekiq-monitor/master/examples/screenshot.png" />](https://raw.github.com/socialpandas/sidekiq-monitor/master/examples/screenshot.png)
+
 Installation
 ------------
 
