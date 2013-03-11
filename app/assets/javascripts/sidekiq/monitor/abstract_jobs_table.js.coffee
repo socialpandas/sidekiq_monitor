@@ -149,7 +149,7 @@ class SidekiqMonitor.AbstractJobsTable
     @reload_table()
 
   reload_table: =>
-    @table.dataTable().fnReloadAjax(@table.data('source'))
+    @table.dataTable().fnStandingRedraw()
 
   start_polling: =>
     setInterval =>
