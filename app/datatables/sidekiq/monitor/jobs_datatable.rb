@@ -61,9 +61,13 @@ module Sidekiq
       def get_duration(job)
         if job.started_at
           to_time = job.finished_at ? job.finished_at : Time.now
-          return distance_of_time_in_words(job.started_at, to_time, true)
+          return simplified_distance_of_time_in_words(job.started_at, to_time)
         end
         nil
+      end
+
+      def simplified_distance_of_time_in_words(from_time, to_time)
+        distance_of_time_in_words(from_time, to_time, true).gsub('less than ', '')
       end
     end
   end
