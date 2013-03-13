@@ -11,6 +11,8 @@ class SidekiqMonitor.AbstractJobsTable
     @columns = @options.columns
     @status_filter = null
 
+    $.getJSON SidekiqMonitor.settings.api_url('jobs/clean')
+
     @table.dataTable
       bProcessing: true
       bServerSide: true

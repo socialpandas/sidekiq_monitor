@@ -20,6 +20,12 @@ module Sidekiq
           worker.perform_async(*args)
           render json: {}, status: :ok
         end
+
+        def clean
+          cleaner = Sidekiq::Monitor::Cleaner.new
+          cleaner.clean
+          render json: {}, status: :ok
+        end
       end
     end
   end
