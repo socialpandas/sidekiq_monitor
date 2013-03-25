@@ -14,6 +14,7 @@ class CreateSidekiqJobs < ActiveRecord::Migration
       t.text :result
     end
 
+    add_index :sidekiq_jobs, :jid
     add_index :sidekiq_jobs, :queue
     add_index :sidekiq_jobs, :retry
     add_index :sidekiq_jobs, :class_name
