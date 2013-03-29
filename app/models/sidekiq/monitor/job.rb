@@ -12,6 +12,16 @@ module Sidekiq
         'complete',
         'failed'
       ]
+
+      def self.destroy_by_queue(queue_name, conditions={})
+        jobs = where(conditions).where(status: 'queued', queue: queue_name).destroy_all
+        jids = jobs.map(&:jid)
+        queue = Sidekiq::Queue.new(queue_name)
+        queue.each do |job|
+          job.delete if conditions.blank? || jids.include?(job.jid)
+        end
+        jobs
+      end
     end
   end
 end
