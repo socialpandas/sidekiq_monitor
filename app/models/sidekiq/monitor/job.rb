@@ -6,6 +6,8 @@ module Sidekiq
       serialize :args
       serialize :result
 
+      after_destroy :destroy_in_queue
+
       STATUSES = [
         'queued',
         'running',
@@ -13,11 +15,19 @@ module Sidekiq
         'failed'
       ]
 
-      def self.destroy_by_queue(queue_name, conditions={})
-        jobs = where(conditions).where(status: 'queued', queue: queue_name).destroy_all
+      def destroy_in_queue
+        return true unless status == 'queued'
+        sidekiq_queue = Sidekiq::Queue.new(queue)
+        sidekiq_queue.each do |job|
+          return job.delete if job.jid == jid
+        end
+      end
+
+      def self.destroy_by_queue(queue, conditions={})
+        jobs = where(conditions).where(status: 'queued', queue: queue).destroy_all
         jids = jobs.map(&:jid)
-        queue = Sidekiq::Queue.new(queue_name)
-        queue.each do |job|
+        sidekiq_queue = Sidekiq::Queue.new(queue)
+        sidekiq_queue.each do |job|
           job.delete if conditions.blank? || jids.include?(job.jid)
         end
         jobs
