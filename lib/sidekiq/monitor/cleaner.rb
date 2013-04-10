@@ -38,6 +38,7 @@ module Sidekiq
           busy_jids = []
           workers.each do |worker|
             worker = conn.get("worker:#{worker}")
+            next if worker.blank?
             worker = Sidekiq.load_json(worker)
             busy_jids << worker['payload']['jid']
           end
