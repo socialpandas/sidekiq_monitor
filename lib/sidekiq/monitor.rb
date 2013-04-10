@@ -2,10 +2,6 @@ require 'slim'
 
 directory = File.dirname(File.absolute_path(__FILE__))
 Dir.glob("#{directory}/monitor/**/*.rb") { |file| require file }
-Dir.glob("#{directory}/../../app/datatables/*.rb") { |file| file; require file }
-Dir.glob("#{directory}/../../app/helpers/sidekiq/monitor/*.rb") { |file| file; require file }
-Dir.glob("#{directory}/../../app/controllers/sidekiq/monitor/*.rb") { |file| file; require file }
-Dir.glob("#{directory}/../../app/models/sidekiq/monitor/*.rb") { |file| file; require file }
 
 module Sidekiq
   module Monitor
