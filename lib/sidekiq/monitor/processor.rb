@@ -4,7 +4,7 @@ module Sidekiq
       def queue(worker_class, item, queue)
         args = item['args']
         name = job_name(worker_class, args)
-        Job.find_or_create_by_jid(
+        Sidekiq::Monitor::Job.find_or_create_by_jid(
           jid: item['jid'],
           queue: queue,
           class_name: worker_class.name,
@@ -19,10 +19,10 @@ module Sidekiq
       def start(worker, msg, queue)
         jid = msg['jid']
         args = msg['args']
-        job = Job.find_by_jid(jid)
+        job = Sidekiq::Monitor::Job.find_by_jid(jid)
         if job.blank?
           name = job_name(worker.class, args)
-          job = Job.new(
+          job = Sidekiq::Monitor::Job.new(
             jid: jid,
             queue: queue,
             class_name: worker.class.name,
@@ -62,7 +62,7 @@ module Sidekiq
       protected
 
       def find_job(msg)
-        Job.find_by_jid(msg['jid'])
+        Sidekiq::Monitor::Job.find_by_jid(msg['jid'])
       end
 
       def job_name(worker_class, args)
