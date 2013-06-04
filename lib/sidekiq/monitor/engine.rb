@@ -3,7 +3,7 @@ module Sidekiq
     class Engine < ::Rails::Engine
       isolate_namespace Monitor
 
-      initializer "sidekiq-monitor.asset_pipeline" do |app|
+      initializer "sidekiq_monitor.asset_pipeline" do |app|
         app.config.assets.precompile << 'sidekiq/monitor/application.js'
       end
     end

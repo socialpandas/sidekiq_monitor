@@ -28,14 +28,14 @@ It lets you:
 
 And it looks like this:
 
-[<img src="https://raw.github.com/socialpandas/sidekiq-monitor/master/examples/screenshot.png" />](https://raw.github.com/socialpandas/sidekiq-monitor/master/examples/screenshot.png)
+[<img src="https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot.png" />](https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot.png)
 
 Installation
 ------------
 
-Add sidekiq-monitor to your Gemfile:
+Add sidekiq_monitor to your Gemfile:
 
-    gem 'sidekiq-monitor', :git => 'git://github.com/socialpandas/sidekiq-monitor.git'
+    gem 'sidekiq_monitor'
 
 Install and run the migration:
 

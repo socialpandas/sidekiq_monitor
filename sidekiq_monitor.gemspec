@@ -3,12 +3,11 @@ require File.expand_path('../lib/sidekiq/monitor/version', __FILE__)
 Gem::Specification.new do |s|
   s.authors       = ["Tom Benner"]
   s.email         = ["tombenner@gmail.com"]
-  s.description   = %q{Advanced monitoring for Sidekiq}
-  s.summary       = %q{A detailed, malleable UI for monitoring Sidekiq jobs.}
-  s.homepage      = "https://github.com/socialpandas/sidekiq-monitor"
+  s.description = s.summary = %q{Advanced monitoring for Sidekiq}
+  s.homepage      = "https://github.com/socialpandas/sidekiq_monitor"
 
   s.files         = Dir["{app,config,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
-  s.name          = "sidekiq-monitor"
+  s.name          = "sidekiq_monitor"
   s.require_paths = ["lib"]
   s.version       = Sidekiq::Monitor::VERSION
 
