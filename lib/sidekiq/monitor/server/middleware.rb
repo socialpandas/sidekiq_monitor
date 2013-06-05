@@ -12,7 +12,7 @@ module Sidekiq
             return_value = yield
           rescue Exception => exception
             @processor.error(worker, msg, queue, exception)
-            return
+            raise exception
           end
           @processor.complete(worker, msg, queue, return_value)
         end
