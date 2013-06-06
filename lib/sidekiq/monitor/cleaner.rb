@@ -1,6 +1,17 @@
 module Sidekiq
   module Monitor
     class Cleaner
+      @ignored_queues = []
+
+      class << self
+        attr_reader :ignored_queues
+
+        def add_ignored_queue(queue)
+          @ignored_queues << queue.to_s
+          @ignored_queues.uniq!
+        end
+      end
+
       # Cleans up records that are no longer in sync with Sidekiq's records
       def clean
         clean_queued
@@ -22,7 +33,7 @@ module Sidekiq
           end
 
           Sidekiq::Monitor::Job.where(status: 'queued').each do |job|
-            unless queued_jids.include?(job.jid)
+            if !queued_jids.include?(job.jid) && !is_ignored_queue?(job.queue)
               job.update_attributes(
                 finished_at: DateTime.now,
                 status: 'interrupted'
@@ -44,7 +55,7 @@ module Sidekiq
           end
 
           Sidekiq::Monitor::Job.where(status: 'running').each do |job|
-            unless busy_jids.include?(job.jid)
+            if !busy_jids.include?(job.jid) && !is_ignored_queue?(job.queue)
               job.update_attributes(
                 finished_at: DateTime.now,
                 status: 'interrupted'
@@ -52,6 +63,10 @@ module Sidekiq
             end
           end
         end
+      end
+
+      def is_ignored_queue?(queue)
+        self.class.ignored_queues.include?(queue)
       end
     end
   end
