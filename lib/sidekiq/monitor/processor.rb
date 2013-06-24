@@ -19,6 +19,7 @@ module Sidekiq
       def start(worker, msg, queue)
         jid = msg['jid']
         args = msg['args']
+        now = DateTime.now
         job = Sidekiq::Monitor::Job.find_by_jid(jid)
         if job.blank?
           name = job_name(worker.class, args)
@@ -28,11 +29,12 @@ module Sidekiq
             class_name: worker.class.name,
             args: args,
             retry: msg['retry'],
+            enqueued_at: now,
             name: name
           )
         end
         job.update_attributes(
-          started_at: DateTime.now,
+          started_at: now,
           status: 'running'
         )
       end
