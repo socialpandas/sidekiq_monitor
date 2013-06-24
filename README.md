@@ -4,7 +4,7 @@ Advanced monitoring for Sidekiq
 
 Description
 -----------
-Sidekiq Monitor offers a detailed, malleable UI for monitoring Sidekiq jobs.
+Sidekiq Monitor offers a detailed UI for monitoring Sidekiq jobs, letting you filter, search, and sort jobs by many attributes, view error backtraces, set job completion metadata, and more.
 
 It lets you:
 
@@ -29,6 +29,12 @@ It lets you:
 And it looks like this:
 
 [<img src="https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot.png" />](https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot.png)
+
+Sidekiq Monitor stores jobs using ActiveRecord, allowing you to perform complex queries and delete specific collections of jobs:
+
+```ruby
+Sidekiq::Monitor::Job.where(queue: 'user_update').where('enqueued_at > ?', 2.days.ago).destroy_all
+```
 
 Installation
 ------------
