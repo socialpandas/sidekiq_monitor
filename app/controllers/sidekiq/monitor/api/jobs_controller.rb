@@ -8,6 +8,20 @@ module Sidekiq
           render json: JobsDatatable.new(view_context)
         end
 
+        def custom_views
+          job = Job.find(params[:id])
+          render json: {}, status: 404 and return if job.blank?
+
+          views = CustomViews.for_job(job)
+          views = views.collect do |view|
+            {
+              name: view[:name],
+              html: render_to_string(view[:path], locals: {job: job, path: view[:path]})
+            }
+          end
+          render json: views, status: :ok
+        end
+
         def retry
           jid = params[:jid]
           render json: {}, status: 404 and return if jid.blank?

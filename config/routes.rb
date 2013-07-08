@@ -4,7 +4,7 @@ Sidekiq::Monitor::Engine.routes.draw do
   
   namespace 'api' do
     match '/jobs' => 'jobs#index'
-    match '/jobs/:action' => 'jobs'
+    match '/jobs/:action(/:id)' => 'jobs'
     match '/queues/:queue' => 'queues#show'
   end
 end

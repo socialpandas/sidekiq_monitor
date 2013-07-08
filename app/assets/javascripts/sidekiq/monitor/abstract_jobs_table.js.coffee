@@ -146,12 +146,23 @@ class SidekiqMonitor.AbstractJobsTable
             </tr>
           </table>
           #{result_html}
+          <div class="job-custom-views"></div>
         </div>
       </div>
     """
     $('.job-modal').modal('hide')
     $('body').append(modal_html)
-    $('.job-modal:last').modal()
+    modal = $('.job-modal:last')
+    modal.modal
+      width: 480
+    $.getJSON SidekiqMonitor.settings.api_url("jobs/custom_views/#{id}"), (views) ->
+      html = ''
+      for view in views
+        html += """
+          <h4>#{view['name']}</h4>
+          #{view['html']}
+        """
+      $('.job-custom-views', modal).html(html)
 
   on_poll: =>
     @reload_table()
