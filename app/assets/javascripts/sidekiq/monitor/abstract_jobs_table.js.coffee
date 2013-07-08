@@ -129,7 +129,7 @@ class SidekiqMonitor.AbstractJobsTable
             </tr>
             <tr>
               <th>Args</th>
-              <td>#{args}</td>
+              <td>#{JSON.stringify(args, null, 2)}</td>
             </tr>
             <tr>
               <th>Started</th>
