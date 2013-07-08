@@ -6,6 +6,7 @@ module Sidekiq
       def initialize(view)
         @model_name = Sidekiq::Monitor::Job
         @columns = [
+          'sidekiq_jobs.id',
           'sidekiq_jobs.jid',
           'sidekiq_jobs.queue',
           'sidekiq_jobs.class_name',
@@ -33,6 +34,7 @@ module Sidekiq
       def data
         jobs.map do |job|
           [
+            job.id,
             job.jid,
             job.queue,
             job.class_name,

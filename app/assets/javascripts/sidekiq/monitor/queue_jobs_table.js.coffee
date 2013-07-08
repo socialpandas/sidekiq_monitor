@@ -4,18 +4,20 @@ class SidekiqMonitor.QueuesTable extends SidekiqMonitor.AbstractJobsTable
     options =
       table_selector: 'table.queue-jobs'
       columns:
-        jid: 0
-        queue: 1
-        class_name: 2
-        name: 3
-        enqueued_at: 4
-        started_at: 5
-        duration: 6
-        message: 7
-        status: 8
-        result: 9
-        args: 10
+        id: 0
+        jid: 1
+        queue: 2
+        class_name: 3
+        name: 4
+        enqueued_at: 5
+        started_at: 6
+        duration: 7
+        message: 8
+        status: 9
+        result: 10
+        args: 11
       column_options: [
+        { bVisible: false }
         { bVisible: false }
         { bVisible: false }
         null

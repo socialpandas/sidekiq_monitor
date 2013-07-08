@@ -77,6 +77,7 @@ class SidekiqMonitor.AbstractJobsTable
   show_job: (job) =>
     return false if !job?
     
+    id = job[@columns.id]
     jid = job[@columns.jid]
     class_name = job[@columns.class_name]
     name = job[@columns.name]
