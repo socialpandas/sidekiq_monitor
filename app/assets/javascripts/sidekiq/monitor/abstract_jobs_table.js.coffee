@@ -79,6 +79,7 @@ class SidekiqMonitor.AbstractJobsTable
     
     jid = job[@columns.jid]
     class_name = job[@columns.class_name]
+    name = job[@columns.name]
     started_at = job[@columns.started_at]
     duration = job[@columns.duration]
     status = job[@columns.status]
@@ -121,6 +122,10 @@ class SidekiqMonitor.AbstractJobsTable
             <tr>
               <th>Class</th>
               <td>#{class_name}</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>#{name}</td>
             </tr>
             <tr>
               <th>Args</th>
