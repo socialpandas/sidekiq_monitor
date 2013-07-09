@@ -58,8 +58,8 @@ class SidekiqMonitor.AbstractJobsTable
       @show_job(job)
       false
     @table.on 'click', '.retry-job', (e) =>
-      jid = $(e.target).attr('data-job-jid')
-      $.getJSON SidekiqMonitor.settings.api_url('jobs/retry?jid='+jid), =>
+      id = $(e.target).attr('data-job-id')
+      $.getJSON SidekiqMonitor.settings.api_url('jobs/retry/'+id), =>
         @reload_table()
       false
 

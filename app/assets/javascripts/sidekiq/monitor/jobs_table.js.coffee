@@ -46,7 +46,7 @@ class SidekiqMonitor.JobsTable extends SidekiqMonitor.AbstractJobsTable
                 'info'
             html = """<a href="#" class="btn btn-#{class_name} btn-mini status-value">#{oObj.aData[@columns.status]}</a>"""
             if status == 'failed'
-              html += """<a href="#" class="btn btn-mini btn-primary retry-job" data-job-jid="#{oObj.aData[0]}">Retry<a>"""
+              html += """<a href="#" class="btn btn-mini btn-primary retry-job" data-job-id="#{oObj.aData[@columns.id]}">Retry<a>"""
             """<span class="action-buttons">#{html}</span>"""
         }
         { bVisible: false }

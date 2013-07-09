@@ -23,10 +23,10 @@ module Sidekiq
         end
 
         def retry
-          jid = params[:jid]
-          render json: {}, status: 404 and return if jid.blank?
+          id = params[:id]
+          render json: {}, status: 404 and return if id.blank?
 
-          job = Job.find_by_jid(jid)
+          job = Job.find(id)
           render json: {}, status: 404 and return if job.blank?
 
           args = job.args
