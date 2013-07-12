@@ -1,10 +1,10 @@
 Sidekiq::Monitor::Engine.routes.draw do
-  match '/' => 'jobs#index', :as => 'sidekiq_monitor'
-  match '/queues' => 'queues#index'
+  get '/', to: 'jobs#index', :as => 'sidekiq_monitor'
+  get '/queues', to: 'queues#index'
   
   namespace 'api' do
-    match '/jobs' => 'jobs#index'
-    match '/jobs/:action(/:id)' => 'jobs'
-    match '/queues/:queue' => 'queues#show'
+    get '/jobs', to: 'jobs#index'
+    match '/jobs/:action(/:id)' => 'jobs', via: :all
+    get '/queues/:queue', to: 'queues#show'
   end
 end
