@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.name          = "sidekiq_monitor"
   s.require_paths = ["lib"]
   s.version       = Sidekiq::Monitor::VERSION
+  s.license       = 'MIT'
 
   s.add_dependency "sidekiq", ">= 2.2.1"
   s.add_dependency "slim"
