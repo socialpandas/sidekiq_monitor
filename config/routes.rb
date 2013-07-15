@@ -4,7 +4,9 @@ Sidekiq::Monitor::Engine.routes.draw do
   
   namespace 'api' do
     get '/jobs', to: 'jobs#index'
-    match '/jobs/:action(/:id)' => 'jobs', via: :all
+    get '/jobs/clean', to: 'jobs#clean'
+    get '/jobs/custom_views/:id', to: 'jobs#custom_views'
+    get '/jobs/retry/:id', to: 'jobs#retry'
     get '/queues/:queue', to: 'queues#show'
   end
 end
