@@ -101,8 +101,11 @@ class SidekiqMonitor.AbstractJobsTable
         </pre>
       """
     else if result?
-      rows_html = "<tr><td>#{key}</td><td>#{value}</td></tr>" for key, value in result
+      rows_html = ''
+      for key, value of result
+        rows_html += "<tr><td>#{key}</td><td>#{JSON.stringify(value, null, 2)}</td></tr>"
       result_html = """
+        <h4>Result</h4>
         <table class="table table-striped">
           #{rows_html}
         </table>
