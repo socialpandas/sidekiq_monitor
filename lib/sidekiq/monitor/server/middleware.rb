@@ -15,6 +15,7 @@ module Sidekiq
             raise exception
           end
           @processor.complete(worker, msg, queue, return_value)
+          return_value
         end
       end
     end
