@@ -45,6 +45,7 @@ module Sidekiq
           backtrace: exception.backtrace
         }
         job = find_job(msg)
+        return unless job
         job.update_attributes(
           finished_at: DateTime.now,
           status: 'failed',
@@ -54,6 +55,7 @@ module Sidekiq
 
       def complete(worker, msg, queue, return_value)
         job = find_job(msg)
+        return unless job
         job.update_attributes(
           finished_at: DateTime.now,
           status: 'complete',
