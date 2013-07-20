@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = s.summary = %q{Advanced monitoring for Sidekiq}
   s.homepage      = "https://github.com/socialpandas/sidekiq_monitor"
 
-  s.files         = Dir["{app,config,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
+  s.files         = Dir["{app,config,lib,vendor}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.name          = "sidekiq_monitor"
   s.require_paths = ["lib"]
   s.version       = Sidekiq::Monitor::VERSION
