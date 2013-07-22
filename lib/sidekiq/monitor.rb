@@ -4,6 +4,8 @@ require 'ajax-datatables-rails'
 
 directory = File.dirname(File.absolute_path(__FILE__))
 Dir.glob("#{directory}/monitor/**/*.rb") { |file| require file }
+# Require JobsDatatable to expose JobsDatatable.add_search_filter
+Dir.glob("#{directory}/../../app/datatables/sidekiq/monitor/jobs_datatable.rb") { |file| require file }
 
 module Sidekiq
   module Monitor
