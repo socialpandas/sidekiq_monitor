@@ -120,6 +120,10 @@ class SidekiqMonitor.AbstractJobsTable
         <div class="modal-body">
           <table class="table table-striped">
             <tr>
+              <th>ID</th>
+              <td>#{id}</td>
+            </tr>
+            <tr>
               <th>JID</th>
               <td>#{jid}</td>
             </tr>
