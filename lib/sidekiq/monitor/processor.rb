@@ -41,7 +41,7 @@ module Sidekiq
 
       def error(worker, msg, queue, exception)
         result = {
-          message: exception.message,
+          message: "#{exception.class.name}: #{exception.message}",
           backtrace: exception.backtrace
         }
         job = find_job(msg)
