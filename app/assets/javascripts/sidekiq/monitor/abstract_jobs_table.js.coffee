@@ -31,14 +31,13 @@ class SidekiqMonitor.AbstractJobsTable
       fnInitComplete: () =>
         filter_container = @table.siblings('.dataTables_filter')
         filter_container.find('input').attr('placeholder', 'Search...')
-        filter_container.prepend '
-          <div class="btn-group status-filter" data-toggle="buttons-radio">
-            <button type="button" class="btn btn-small" data-value="queued">Queued</button>
-            <button type="button" class="btn btn-small" data-value="running">Running</button>
-            <button type="button" class="btn btn-small" data-value="complete">Complete</button>
-            <button type="button" class="btn btn-small" data-value="failed">Failed</button>
-          </div>'
-        @status_filter = filter_container.find('.status-filter')
+        $.getJSON SidekiqMonitor.settings.api_url('jobs/statuses'), (statuses) =>
+          status_filter_html = ''
+          $.each statuses, (key, status) =>
+            status_filter_html += """<button type="button" class="btn btn-small" data-value="#{status}">#{status}</button>"""
+          status_filter_html = """<div class="btn-group status-filter" data-toggle="buttons-radio">#{status_filter_html}</div>"""
+          filter_container.prepend status_filter_html
+          @status_filter = filter_container.find('.status-filter')
       fnServerData: (sSource, aoData, fnCallback) =>
         $.each @api_params, (key, value) =>
           aoData.push

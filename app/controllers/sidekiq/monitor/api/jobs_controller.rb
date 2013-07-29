@@ -40,6 +40,10 @@ module Sidekiq
           cleaner.clean
           render json: {}, status: :ok
         end
+
+        def statuses
+          render json: Sidekiq::Monitor::Job.statuses, status: :ok
+        end
       end
     end
   end
