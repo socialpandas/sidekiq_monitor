@@ -8,12 +8,31 @@ module Sidekiq
 
       after_destroy :delete_sidekiq_job
 
-      STATUSES = [
+      @statuses = [
         'queued',
         'running',
         'complete',
         'failed'
       ]
+
+      class << self
+        attr_reader :statuses
+
+        def add_status(status)
+          @statuses << status
+          @statuses.uniq!
+        end
+
+        def destroy_by_queue(queue, conditions={})
+          jobs = where(conditions).where(status: 'queued', queue: queue).destroy_all
+          jids = jobs.map(&:jid)
+          sidekiq_queue = Sidekiq::Queue.new(queue)
+          sidekiq_queue.each do |job|
+            job.delete if conditions.blank? || jids.include?(job.jid)
+          end
+          jobs
+        end
+      end
 
       def sidekiq_item
         job = sidekiq_job
@@ -32,16 +51,6 @@ module Sidekiq
         return true unless status == 'queued'
         job = sidekiq_job
         job.delete if job
-      end
-
-      def self.destroy_by_queue(queue, conditions={})
-        jobs = where(conditions).where(status: 'queued', queue: queue).destroy_all
-        jids = jobs.map(&:jid)
-        sidekiq_queue = Sidekiq::Queue.new(queue)
-        sidekiq_queue.each do |job|
-          job.delete if conditions.blank? || jids.include?(job.jid)
-        end
-        jobs
       end
     end
   end
