@@ -9,6 +9,9 @@ module Sidekiq
       
       def index
       end
+
+      def graph
+      end
     end
   end
 end

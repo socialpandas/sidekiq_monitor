@@ -19,8 +19,9 @@ html lang="en"
 
           .nav-collapse
             ul.nav
-              li class=(params[:controller] == 'sidekiq/monitor/jobs' ? 'active' : '') = link_to "Jobs", root_path
+              li class=(params[:controller] == 'sidekiq/monitor/jobs' && params[:action] != 'graph' ? 'active' : '') = link_to "Jobs", root_path
               li class=(params[:controller] == 'sidekiq/monitor/queues' ? 'active' : '') = link_to "Queues", "#{root_path}queues"
+              li class=(params[:controller] == 'sidekiq/monitor/jobs' && params[:action] == 'graph' ? 'active' : '') = link_to "Graph", "#{root_path}graph"
 
     .container
       = yield
