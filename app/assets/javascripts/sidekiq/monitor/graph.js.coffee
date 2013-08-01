@@ -30,7 +30,7 @@ class SidekiqMonitor.Graph
     , @options.poll_interval
     
   render: =>
-    d3.json('/monitor/api/jobs/graph', (data) =>
+    d3.json(SidekiqMonitor.settings.api_url('jobs/graph'), (data) =>
 
       # Clear out the previously rendered graph 
       $(@options.selector).text('')
