@@ -1,4 +1,4 @@
-class SidekiqMonitor.QueuesTable extends SidekiqMonitor.AbstractJobsTable
+class SidekiqMonitor.QueueJobsTable extends SidekiqMonitor.AbstractJobsTable
 
   initialize: =>
     options =
@@ -91,4 +91,4 @@ class SidekiqMonitor.QueuesTable extends SidekiqMonitor.AbstractJobsTable
     @reload_table()
 
 $ ->
-  new SidekiqMonitor.QueuesTable
+  new SidekiqMonitor.QueueJobsTable
