@@ -112,7 +112,7 @@ class SidekiqMonitor.Graph
       legend_box_height = 18
 
       legend = @svg.selectAll('.legend')
-          .data(@color_scale.domain().slice())
+          .data(@color_scale.domain().reverse().slice())
         .enter().append('g')
           .attr('class', 'legend')
           .attr('transform', (d, i) => 'translate(0,' + i * 20 + ')')
