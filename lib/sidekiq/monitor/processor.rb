@@ -7,7 +7,7 @@ module Sidekiq
         Sidekiq::Monitor::Job.find_or_create_by_jid(
           jid: item['jid'],
           queue: queue,
-          class_name: worker_class.name,
+          class_name: worker_class.is_a?(String) ? worker_class : worker_class.name,
           args: args,
           retry: item['retry'],
           enqueued_at: DateTime.now,
