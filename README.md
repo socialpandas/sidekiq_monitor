@@ -28,7 +28,11 @@ It lets you:
 
 And it looks like this:
 
-[<img src="https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot.png" />](https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot.png)
+[<img src="https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot_jobs.png" />](https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot.png)
+
+It also includes a live, stacked histogram showing the health of each queue:
+
+[<img src="https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot_graph.png" />](https://raw.github.com/socialpandas/sidekiq_monitor/master/examples/screenshot.png)
 
 Sidekiq Monitor stores jobs using ActiveRecord, allowing you to perform complex queries and delete specific collections of jobs:
 
