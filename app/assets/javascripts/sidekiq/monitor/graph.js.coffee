@@ -9,8 +9,8 @@ class SidekiqMonitor.Graph
   initialize: (options) =>
     @options = options
     @width = 960
-    @height = 500
-    @padding = [20, 50, 30, 20]
+    @height = 580
+    @padding = [120, 50, 30, 20]
 
     # These correspond to Job.statuses: queued, running, complete, failed, [custom statuses]
     colors = ['lightblue', 'blue', 'green', 'red', 'gray', 'purple', 'yellow']
