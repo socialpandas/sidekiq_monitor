@@ -78,7 +78,7 @@ class SidekiqMonitor.Graph
           .attr('height', (d) => @y_scale(d.y) )
           .attr('width', @x_scale.rangeBand())
           .append('title')
-            .text((d) => "#{d.y} jobs")
+            .text((d) => if d.y == 1 then "#{d.y} job" else "#{d.y} jobs")
 
       # Labels for queues
       label = @svg.selectAll('text')
