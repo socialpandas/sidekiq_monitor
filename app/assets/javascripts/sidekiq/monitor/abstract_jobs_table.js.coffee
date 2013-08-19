@@ -171,7 +171,8 @@ class SidekiqMonitor.AbstractJobsTable
       $('.job-custom-views', modal).html(html)
 
   on_poll: =>
-    @reload_table()
+    if document.hasFocus()
+      @reload_table()
 
   reload_table: =>
     @table.dataTable().fnStandingRedraw()

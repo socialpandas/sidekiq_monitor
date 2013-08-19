@@ -28,7 +28,8 @@ class SidekiqMonitor.Graph
 
   start_polling: =>
     setInterval =>
-      @render()
+      if document.hasFocus()
+        @render()
     , @options.poll_interval
     
   render: =>
