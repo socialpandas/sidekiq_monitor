@@ -87,8 +87,5 @@ class SidekiqMonitor.QueueJobsTable extends SidekiqMonitor.AbstractJobsTable
     @api_params['queue'] = @queue
     @show_queue_stats()
 
-  on_poll: =>
-    @reload_table()
-
 $ ->
   new SidekiqMonitor.QueueJobsTable
