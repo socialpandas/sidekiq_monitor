@@ -12,6 +12,8 @@ class SidekiqMonitor.Graph
     @height = 580
     @padding = [120, 50, 30, 20]
 
+    return null unless $(options.selector).length
+
     # These correspond to Job.statuses: queued, running, complete, failed, [custom statuses]
     colors = ['lightblue', 'blue', 'green', 'red', 'gray', 'purple', 'yellow']
 
