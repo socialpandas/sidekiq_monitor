@@ -9,6 +9,18 @@ Dir.glob("#{directory}/../../app/datatables/sidekiq/monitor/jobs_datatable.rb") 
 
 module Sidekiq
   module Monitor
+    DEFAULTS = {
+      :graphs => nil
+    }
+
+    def self.options
+      @options ||= DEFAULTS.dup
+    end
+
+    def self.options=(opts)
+      @options = opts
+    end
+
     def self.table_name_prefix
       'sidekiq_'
     end

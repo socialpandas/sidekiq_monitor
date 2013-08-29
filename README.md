@@ -92,6 +92,22 @@ class HardWorker
 end
 ```
 
+### Graph
+
+A single histogram will be shown by default in the Graph view, but you can also split the queues into multiple histograms. (This is especially useful if you have a large number of queues and the single histogram has too many bars to be readable.) The keys of this hash are JS regex patterns for matching queues, and the values of the hash will be the titles of each histogram:
+
+```ruby
+# config/initializers/sidekiq_monitor.rb
+Sidekiq::Monitor.options[:graphs] = {
+  'ALL' => 'All',
+  'OTHER' => 'Default Priority',
+  '_high$' => 'High Priority',
+  '_low$' => 'Low Priority'
+}
+```
+
+`ALL` and `OTHER` are special keys: `ALL` will show all queues and `OTHER` will show all queues that aren't matched by the regex keys.
+
 ### Authentication
 
 You'll likely want to restrict access to this interface in a production setting. To do this, you can use routing constraints:

@@ -3,3 +3,4 @@ window.SidekiqMonitor =
   settings:
     api_url: (path) ->
       "<%= url_helpers.sidekiq_monitor_path %>api/#{path}"
+    graphs: <%= Sidekiq::Monitor.options[:graphs].to_json %>
