@@ -87,10 +87,15 @@ class HardWorker
 
   def perform(user_ids)
     puts 'Doing hard work'
-    { processed_users_count: user_ids.length }
+    {
+      message: "#{user_ids.length} users processed",
+      processed_users_count: user_ids.length
+    }
   end
 end
 ```
+
+If you set `:message` as a key of this hash, that value will be displayed in the Result column of jobs tables in the UI. To view the full result hash of a job in the UI, click on the job status button to open up the modal job view.
 
 ### Graph
 
