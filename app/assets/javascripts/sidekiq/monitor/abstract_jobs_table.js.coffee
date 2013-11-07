@@ -91,9 +91,21 @@ class SidekiqMonitor.AbstractJobsTable
 
     result_html = ''
     if status == 'failed'
+      rows_html = ''
+      for key, value of result
+        if key != 'message' && key != 'backtrace'
+          rows_html += "<tr><td>#{key}</td><td>#{JSON.stringify(value, null, 2)}</td></tr>"
+      if rows_html
+        rows_html = """
+          <h4>Result</h4>
+          <table class="table table-striped">
+            #{rows_html}
+          </table>
+        """
       result_html = """
         <h4>Error</h4>
         #{result.message}
+        #{rows_html}
         <h5>Backtrace</h5>
         <pre>
         #{result.backtrace.join("\n")}
