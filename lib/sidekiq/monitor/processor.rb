@@ -77,10 +77,11 @@ module Sidekiq
       end
 
       def set_error(job, exception)
-        result = {
+        result = job.result.present? ? job.result.symbolize_keys : {}
+        result.merge!({
           message: "#{exception.class.name}: #{exception.message}",
           backtrace: exception.backtrace
-        }
+        })
         job.update_attributes(
           finished_at: DateTime.now,
           status: 'failed',
