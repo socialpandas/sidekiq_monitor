@@ -113,6 +113,15 @@ Sidekiq::Monitor.options[:graphs] = {
 
 `ALL` and `OTHER` are special keys: `ALL` will show all queues and `OTHER` will show all queues that aren't matched by the regex keys.
 
+#### Poll Interval
+
+The UI uses polling to update its data. By default, the polling interval is 3000ms, but you can adjust this like so:
+
+```ruby
+# config/initializers/sidekiq_monitor.rb
+Sidekiq::Monitor.options[:poll_interval] = 5000
+```
+
 ### Authentication
 
 You'll likely want to restrict access to this interface in a production setting. To do this, you can use routing constraints:

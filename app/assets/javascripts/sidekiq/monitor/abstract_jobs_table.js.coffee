@@ -192,7 +192,7 @@ class SidekiqMonitor.AbstractJobsTable
   start_polling: =>
     setInterval =>
       @on_poll()
-    , 3000
+    , SidekiqMonitor.settings.poll_interval
 
   format_time_ago: (time) =>
     if time?

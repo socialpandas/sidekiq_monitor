@@ -3,7 +3,7 @@ class SidekiqMonitor.Graph
   constructor: ->
     options =
       selector: '.graph'
-      poll_interval: 3000
+      poll_interval: SidekiqMonitor.settings.poll_interval
     @initialize(options)
 
   initialize: (options) =>

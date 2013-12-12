@@ -4,3 +4,4 @@ window.SidekiqMonitor =
     api_url: (path) ->
       "<%= url_helpers.sidekiq_monitor_path %>api/#{path}"
     graphs: <%= Sidekiq::Monitor.options[:graphs].to_json %>
+    poll_interval: <%= Sidekiq::Monitor.options[:poll_interval] || 3000 %>
