@@ -1,9 +1,9 @@
 module Sidekiq
   module Monitor
     class Job < ActiveRecord::Base
-      require 'active_record'
+      require 'rubygems'
       
-      attr_accessible :args, :class_name, :enqueued_at, :finished_at, :jid, :name, :queue, :result, :retry, :started_at, :status if ActiveRecord::VERSION::MAJOR < 4 || ActiveRecord.constants.include?(:MassAssignmentSecurity)
+      attr_accessible :args, :class_name, :enqueued_at, :finished_at, :jid, :name, :queue, :result, :retry, :started_at, :status if ActiveRecord::VERSION::MAJOR < 4 || Gem::Specification.all().map{|g| g.name}.include?("protected_attributes")
 
       serialize :args
       serialize :result
