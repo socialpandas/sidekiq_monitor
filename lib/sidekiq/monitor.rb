@@ -11,6 +11,7 @@ module Sidekiq
   module Monitor
     DEFAULTS = {
       :graphs => nil,
+      :javascripts => [],
       :poll_interval => 3000
     }
 

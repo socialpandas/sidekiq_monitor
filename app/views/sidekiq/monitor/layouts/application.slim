@@ -27,3 +27,5 @@ html lang="en"
       = yield
 
     = javascript_include_tag "sidekiq/monitor/application"
+    - Sidekiq::Monitor.options[:javascripts].each do |javascript|
+      = javascript_include_tag javascript
