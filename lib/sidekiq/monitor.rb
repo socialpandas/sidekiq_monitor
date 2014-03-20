@@ -10,7 +10,8 @@ Dir.glob("#{directory}/../../app/datatables/sidekiq/monitor/jobs_datatable.rb") 
 module Sidekiq
   module Monitor
     DEFAULTS = {
-      :graphs => nil
+      :graphs => nil,
+      :poll_interval => 3000
     }
 
     def self.options
