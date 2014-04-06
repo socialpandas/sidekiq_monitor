@@ -7,8 +7,10 @@ module Sidekiq
         end
 
         def call(worker_class, item, queue)
-          @processor.queue(worker_class, item, queue)
-          yield
+          ActiveRecord::Base.connection_pool.with_connection do
+            @processor.queue(worker_class, item, queue)
+            yield
+          end
         end
       end
     end
