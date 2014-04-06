@@ -26,6 +26,11 @@ module Sidekiq
     def self.table_name_prefix
       'sidekiq_'
     end
+
+    def self.root_path
+      sidekiq_monitor_path = Sidekiq::Monitor::Engine.routes.url_helpers.sidekiq_monitor_path
+      "#{::Rails.application.config.relative_url_root}#{sidekiq_monitor_path}"
+    end
   end
 end
 

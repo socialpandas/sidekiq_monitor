@@ -6,7 +6,7 @@ module Sidekiq
       end
 
       def root_path
-        Sidekiq::Monitor::Engine.routes.url_helpers.sidekiq_monitor_path
+        Sidekiq::Monitor.root_path
       end
     end
   end

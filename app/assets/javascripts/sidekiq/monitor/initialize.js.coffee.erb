@@ -1,7 +1,6 @@
-<% url_helpers = Sidekiq::Monitor::Engine.routes.url_helpers %>
 window.SidekiqMonitor =
   settings:
     api_url: (path) ->
-      "<%= url_helpers.sidekiq_monitor_path %>api/#{path}"
+      "<%= Sidekiq::Monitor.root_path %>api/#{path}"
     graphs: <%= Sidekiq::Monitor.options[:graphs].to_json %>
     poll_interval: <%= Sidekiq::Monitor.options[:poll_interval] %>
