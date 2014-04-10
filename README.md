@@ -122,6 +122,49 @@ The UI uses polling to update its data. By default, the polling interval is 3000
 Sidekiq::Monitor.options[:poll_interval] = 5000
 ```
 
+### UI Customization
+
+#### Custom Statuses
+
+The UI's status filter and histograms show the most common job statuses, but if you'd like to add additional statuses to them (for example, if you want to show "interrupted" jobs or have added custom statuses through middleware), you can make the UI include them like so:
+
+```ruby
+# config/initializers/sidekiq_monitor.rb
+Sidekiq::Monitor::Job.add_status('interrupted')
+```
+
+#### Custom Job Views
+
+When you click on a job, a modal showing its properties is displayed. You can add subviews to this modal by creating a view in your app and calling `Sidekiq::Monitor::CustomViews.add`, passing it the subview's title, the subview's filepath, and a block. The subview is only rendered if the block evaluates to true for the given job.
+
+If you need to add JavaScript for the subview, you can do so by adding an asset path to `Sidekiq::Monitor.options[:javascripts]`.
+
+For example, the following code adds a subview that shows a "Retry" button for jobs with the specified statuses:
+
+```ruby
+# config/initializers/sidekiq_monitor.rb
+view_path = Rails.root.join('app', 'views', 'sidekiq', 'monitor', 'retry').to_s
+Sidekiq::Monitor::CustomViews.add('My View Title', view_path) do |job|
+  %w{complete failed}.include?(job.status)
+end
+Sidekiq::Monitor.options[:javascripts] << 'sidekiq/monitor/retry'
+```
+
+```
+/ app/views/sidekiq/monitor/retry.slim
+a class='btn btn-success' href='#' data-action='retry_job' data-job-id=job.id = 'Retry'
+```
+
+```coffee
+# app/assets/javascripts/sidekiq/monitor/retry.js.coffee
+$ ->
+  $('body').on 'click', '.job-modal [data-action=retry_job]', (e) ->
+    id = $(e.target).attr('data-job-id')
+    $.get SidekiqMonitor.settings.api_url("jobs/retry/#{id}")
+    alert 'Job has been retried'
+    false
+```
+
 ### Authentication
 
 You'll likely want to restrict access to this interface in a production setting. To do this, you can use routing constraints:
