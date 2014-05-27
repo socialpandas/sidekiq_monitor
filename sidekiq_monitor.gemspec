@@ -15,5 +15,5 @@ Gem::Specification.new do |s|
   s.add_dependency "sidekiq", ">= 2.2.1"
   s.add_dependency "slim"
   s.add_dependency "jquery-datatables-rails"
-  s.add_dependency "ajax-datatables-rails"
+  s.add_dependency "rails-datatables"
 end

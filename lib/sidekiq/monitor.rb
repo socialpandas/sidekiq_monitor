@@ -1,6 +1,6 @@
 require 'slim'
 require 'jquery-datatables-rails'
-require 'ajax-datatables-rails'
+require 'rails-datatables'
 
 directory = File.dirname(File.absolute_path(__FILE__))
 Dir.glob("#{directory}/monitor/**/*.rb") { |file| require file }

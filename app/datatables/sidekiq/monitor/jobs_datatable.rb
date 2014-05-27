@@ -1,6 +1,6 @@
 module Sidekiq
   module Monitor
-    class JobsDatatable < AjaxDatatablesRails
+    class JobsDatatable < RailsDatatables
       include ActionView::Helpers::DateHelper
 
       @search_filters = []
