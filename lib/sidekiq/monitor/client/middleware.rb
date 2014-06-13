@@ -6,7 +6,7 @@ module Sidekiq
           @processor = Monitor::Processor.new
         end
 
-        def call(worker_class, item, queue)
+        def call(worker_class, item, queue, redis_pool=nil)
           ActiveRecord::Base.connection_pool.with_connection do
             @processor.queue(worker_class, item, queue)
             yield
