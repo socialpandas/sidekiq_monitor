@@ -79,7 +79,7 @@ module Sidekiq
       end
 
       def simplified_distance_of_time_in_words(from_time, to_time)
-        distance_of_time_in_words(from_time, to_time).gsub('less than ', '').gsub('about ', '')
+        distance_of_time_in_words(from_time, to_time,include_seconds: true).gsub('less than ', '').gsub('about ', '')
       end
 
       def search_records(records)
