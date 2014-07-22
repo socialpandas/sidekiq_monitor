@@ -79,7 +79,7 @@ module Sidekiq
       end
 
       def simplified_distance_of_time_in_words(from_time, to_time)
-        if Rails::VERSION::MAJOR >= 4
+        if ::Rails::VERSION::MAJOR >= 4
           words = distance_of_time_in_words(from_time, to_time, include_seconds: true)
         else
           words = distance_of_time_in_words(from_time, to_time, true)
