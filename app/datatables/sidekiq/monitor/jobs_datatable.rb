@@ -80,6 +80,12 @@ module Sidekiq
 
       def simplified_distance_of_time_in_words(from_time, to_time)
         distance_of_time_in_words(from_time, to_time,include_seconds: true).gsub('less than ', '').gsub('about ', '')
+        if Rails::VERSION::MAJOR >= 4
+            words = distance_of_time_in_words(from_time, to_time, include_seconds: true)
+        else
+            words = distance_of_time_in_words(from_time, to_time, true)
+        end
+        words.gsub('less than ', '').gsub('about ', '')
       end
 
       def search_records(records)
