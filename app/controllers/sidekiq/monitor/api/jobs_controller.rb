@@ -9,9 +9,9 @@ module Sidekiq
         end
 
         def graph
-          queues_jobs = Job.select('queue, status').all.group_by(&:queue)
+          queues_jobs = Sidekiq::Monitor::Job.select('queue, status').all.group_by(&:queue)
           queues = []
-          statuses = Job.statuses
+          statuses = Sidekiq::Monitor::Job.statuses
           queues_status_counts = queues_jobs.collect do |queue, jobs|
             statuses_jobs = jobs.group_by(&:status)
             statuses_job_counts = statuses_jobs.collect do |status, jobs|
@@ -30,7 +30,7 @@ module Sidekiq
         end
 
         def custom_views
-          job = Job.find(params[:id])
+          job = Sidekiq::Monitor::Job.find(params[:id])
           render json: {}, status: 404 and return if job.blank?
 
           views = CustomViews.for_job(job)
@@ -47,7 +47,7 @@ module Sidekiq
           id = params[:id]
           render json: {}, status: 404 and return if id.blank?
 
-          job = Job.find(id)
+          job = Sidekiq::Monitor::Job.find(id)
           render json: {}, status: 404 and return if job.blank?
 
           args = job.args
