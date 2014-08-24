@@ -8,7 +8,7 @@ module Sidekiq
       helper Sidekiq::Monitor::SidekiqHelper
       
       def index
-        @queues = Job.select('DISTINCT queue').collect { |job| job.queue }.sort
+        @queues = Sidekiq::Monitor::Job.select('DISTINCT queue').collect { |job| job.queue }.sort
       end
     end
   end
